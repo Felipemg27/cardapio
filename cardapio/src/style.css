@@ -72,9 +72,9 @@ a { text-decoration: none; color: inherit; }
 }
 .cart-btn.has-items .cart-badge { background: var(--cor-verde); }
 
-/* Hero - brasa istock embers */
+/* Hero - churrasqueira acesa ndmais */
 .hero-simples {
-  background: linear-gradient(rgba(0,0,0,0.68), rgba(10,10,10,0.82)), url('https://media.istockphoto.com/id/2225072639/pt/foto/barbecue-grill-embers-with-flames-and-abstract-sparks-fire-on-charcoal-in-black-background.jpg?s=612x612&w=0&k=20&c=BCT0aEXLntlmCxsbFkeYshwWRFzk1EMswjqgMWrkNL8=') center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.68), rgba(10,10,10,0.82)), url('https://static.ndmais.com.br/2025/05/acender-churrasqueira-2-1300x867.jpg') center/cover no-repeat;
   padding: 130px 0 70px; text-align: center; position: relative; overflow: hidden;
   border-bottom: 2px solid rgba(255,107,53,0.15);
 }
