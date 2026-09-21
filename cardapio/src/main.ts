@@ -513,10 +513,14 @@ function init(): void {
     const itens = cart.getItens();
     const total = cart.getTotal();
 
+    // abre nova guia sincronamente (preserva gesto) para garantir _blank mesmo após await
+    let win: Window | null = null;
+    try { win = window.open('about:blank', '_blank', 'noopener'); } catch { win = null; }
+
     checkoutSubmitting = true;
     if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.textContent = 'Enviando...'; }
     try {
-    // usa apenas 1 navegacao: tenta _blank, se bloqueado cai no mesmo aba (evita 2 abas)
+    // 1 navegacao apenas, sempre em nova guia (original preservada)
     let whatsappLink = '';
     try {
       const pedido = await criarPedido(itens, cliente);
@@ -529,12 +533,19 @@ function init(): void {
       showToast('Redirecionando para WhatsApp...');
     }
     console.log('[checkout] whatsappLink', whatsappLink);
-    const w = window.open(whatsappLink, '_blank', 'noopener');
-    if (!w || w.closed || typeof w.closed === 'undefined') {
-      console.log('[checkout] popup bloqueado, fallback location.href');
-      window.location.href = whatsappLink;
+    if (win && !win.closed) {
+      win.location.href = whatsappLink;
+      try { win.focus(); } catch {}
+      console.log('[checkout] nova guia via pre-open');
     } else {
-      console.log('[checkout] aberto em _blank');
+      const w = window.open(whatsappLink, '_blank', 'noopener');
+      if (w) {
+        console.log('[checkout] nova guia via window.open');
+      } else {
+        console.log('[checkout] popup bloqueado');
+        showToast('Pop-up bloqueado: permita pop-ups para abrir WhatsApp');
+        // não altera guia original; usuário pode clicar no link manualmente se necessário
+      }
     }
     } finally {
       if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.textContent = 'Enviar pedido no WhatsApp 💬'; }
