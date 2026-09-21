@@ -39,8 +39,8 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 4px 20px rgba(192,57,43,0.35);
 }
 .nav-container { display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; }
-.logo { font-family: 'Playfair Display', serif; font-size: 1.95rem; color: #fff; font-weight: 700; letter-spacing: 0.5px; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
-@media (max-width: 768px) { .logo { font-size: 1.5rem; } }
+.logo { font-family: 'Playfair Display', serif; font-size: 2.05rem; color: #fff; font-weight: 800; letter-spacing: 0.8px; position: absolute; left: 47%; transform: translateX(-50%); white-space: nowrap; text-shadow: 0 3px 12px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.15); background: rgba(255,255,255,0.14); padding: 6px 18px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.25); backdrop-filter: blur(6px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+@media (max-width: 768px) { .logo { font-size: 1.55rem; padding: 5px 12px; left: 50%; } }
 .logo span { color: var(--cor-secundaria); }
 .nav-links { list-style: none; display: flex; gap: 10px; align-items: center; }
 .nav-links a {
