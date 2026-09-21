@@ -413,27 +413,32 @@ function init(): void {
     }
   });
 
-  // atualiza via API em background (não bloqueia carrinho/botões)
-  fetchPratos().then((data) => {
-    if (!Array.isArray(data) || data.length === 0) return;
-    if (data.length !== pratos.length) {
-      pratos.splice(0, pratos.length, ...data);
-      renderGrid(pratos);
-      cards = Array.from(document.querySelectorAll<HTMLElement>('.prato-card'));
-      qtdById.clear();
-      fuse.setCollection(pratos);
-      pratoById.clear();
-      pratos.forEach((p) => pratoById.set(p.id, p));
-      console.log(`[cardapio] ${pratos.length} pratos atualizados da API`);
-    } else {
-      // mesmo tamanho, só atualiza coleções sem re-render
-      pratos.splice(0, pratos.length, ...data);
-      fuse.setCollection(pratos);
-      pratoById.clear();
-      pratos.forEach((p) => pratoById.set(p.id, p));
-      qtdById.clear();
-    }
-  }).catch((e) => console.warn('[cardapio] API offline, mantendo fallback', e));
+  // atualiza via API em background (não bloqueia carrinho/botões) — re-render se qualquer campo mudar (imagem/preço)
+  async function syncPratos() {
+    try {
+      const data = await fetchPratos();
+      if (!Array.isArray(data) || data.length === 0) return;
+      const changed = JSON.stringify(data) !== JSON.stringify(pratos);
+      if (changed) {
+        pratos.splice(0, pratos.length, ...data);
+        renderGrid(pratos);
+        cards = Array.from(document.querySelectorAll<HTMLElement>('.prato-card'));
+        qtdById.clear();
+        fuse.setCollection(pratos);
+        pratoById.clear();
+        pratos.forEach((p) => pratoById.set(p.id, p));
+        console.log(`[cardapio] ${pratos.length} pratos sincronizados da API`);
+      }
+    } catch (e) { console.warn('[cardapio] API offline, mantendo fallback', e); }
+  }
+  syncPratos();
+  // escuta atualizações do admin (outra aba) via localStorage
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'cardapio_update') syncPratos();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') syncPratos();
+  });
 
   // checkout refs já declaradas acima (antes de renderCart) para evitar TDZ
   function openCheckout(): void {

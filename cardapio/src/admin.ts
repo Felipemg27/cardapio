@@ -164,6 +164,7 @@ function renderPratos() {
         await deletarPrato(id);
         showToast('Prato excluído');
         loadPratos();
+        try { localStorage.setItem('cardapio_update', Date.now().toString()); } catch {}
       } catch (e: any) {
         showToast(e.message || 'Erro ao excluir', 4000);
       }
@@ -234,6 +235,7 @@ form?.addEventListener('submit', async (e) => {
     }
     resetForm();
     loadPratos();
+    try { localStorage.setItem('cardapio_update', Date.now().toString()); } catch {}
     if (formMsg) { formMsg.textContent = 'Salvo com sucesso!'; formMsg.style.color = '#27ae60'; }
   } catch (err: any) {
     const msg = err.message || 'Erro ao salvar';
