@@ -129,12 +129,18 @@ function init(): void {
 
   const toastEl = document.getElementById('toast') as HTMLElement | null;
   let toastTimer: number | undefined;
-  function showToast(msg: string): void {
+  function showToast(msg: string, durationMs = 2600): void {
     if (!toastEl) return;
     toastEl.textContent = msg;
+    // mensagem de agradecimento maior e por mais tempo
+    const isSuccess = msg.includes('Obrigado') || msg.includes('obrigado');
+    toastEl.classList.toggle('toast--success', isSuccess);
     toastEl.classList.add('show');
     window.clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(() => toastEl.classList.remove('show'), 2600);
+    toastTimer = window.setTimeout(() => {
+      toastEl.classList.remove('show');
+      setTimeout(() => toastEl.classList.remove('toast--success'), 350);
+    }, durationMs);
   }
 
   function openCart(): void {
@@ -564,7 +570,7 @@ function init(): void {
       if (groupEndereco) groupEndereco.style.display = '';
       closeCheckout();
       closeCart();
-      showToast('Obrigado pelo pedido! 🙏 Já abrimos o WhatsApp em nova guia. Em breve retornaremos contato.');
+      showToast('🎉 Obrigado pelo pedido! 🙏 Já abrimos o WhatsApp em nova guia. Em breve retornaremos contato. Seu pedido foi registrado com sucesso!', 6500);
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         // foca inicio
