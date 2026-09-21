@@ -58,9 +58,9 @@ a { text-decoration: none; color: inherit; }
 }
 .menu-toggle:hover { background: #fff; color: var(--cor-primary); }
 
-/* Cart button in navbar */
+/* Cart button in navbar - mesmo estilo Ver Cardapio */
 .cart-btn {
-  position: relative; background: #fff; color: var(--cor-primary); border: none;
+  position: relative; background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; border: none;
   padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 0.9rem;
   cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: all 0.2s;
@@ -327,10 +327,10 @@ a.contato-card:hover .contato-cta { background: #000; transform: translateY(-1px
 .user-menu { position: relative; }
 .user-menu.hidden { display: none !important; }
 .user-trigger {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #fff; color: #0a0a0a; border: 1.5px solid rgba(255,255,255,0.9);
-  padding: 6px 12px 6px 6px; border-radius: 999px; font-weight: 600; font-size: 0.85rem;
-  cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.12); transition: all 0.2s;
+  display: inline-flex; align-items:center; gap: 8px;
+  background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; border: none;
+  padding: 6px 12px 6px 6px; border-radius: 999px; font-weight: 700; font-size: 0.85rem;
+  cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s;
 }
 .user-trigger:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.16); }
 .user-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
