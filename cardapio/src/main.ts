@@ -486,7 +486,14 @@ function init(): void {
   let checkoutSubmitting = false;
   checkoutForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (checkoutSubmitting) return;
+    e.stopPropagation();
+    // @ts-ignore
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    if (checkoutSubmitting) {
+      console.log('[checkout] bloqueado duplo submit');
+      return;
+    }
+    console.log('[checkout] submit unico', Date.now());
     if (!isGoogleLogged()) {
       showToast('Faça login com Google para finalizar o pedido');
       closeCheckout();
@@ -509,18 +516,26 @@ function init(): void {
     checkoutSubmitting = true;
     if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.textContent = 'Enviando...'; }
     try {
+    // usa apenas 1 navegacao: tenta _blank, se bloqueado cai no mesmo aba (evita 2 abas)
+    let whatsappLink = '';
+    try {
       const pedido = await criarPedido(itens, cliente);
       showToast('Pedido #' + pedido.id.slice(0,8) + ' criado! Redirecionando para WhatsApp...');
-      const link = pedido.whatsappLink;
-      const w = window.open(link, '_blank', 'noopener');
-      if (!w) window.location.href = link;
+      whatsappLink = pedido.whatsappLink;
     } catch (err: any) {
       console.warn('[cardapio] falha API, fallback local', err);
       const msg = buildMensagem(itens, total, cliente);
-      const link = getWhatsAppLink(msg);
-      const w = window.open(link, '_blank', 'noopener');
-      if (!w) window.location.href = link;
+      whatsappLink = getWhatsAppLink(msg);
       showToast('Redirecionando para WhatsApp...');
+    }
+    console.log('[checkout] whatsappLink', whatsappLink);
+    const w = window.open(whatsappLink, '_blank', 'noopener');
+    if (!w || w.closed || typeof w.closed === 'undefined') {
+      console.log('[checkout] popup bloqueado, fallback location.href');
+      window.location.href = whatsappLink;
+    } else {
+      console.log('[checkout] aberto em _blank');
+    }
     } finally {
       if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.textContent = 'Enviar pedido no WhatsApp 💬'; }
       setTimeout(() => { checkoutSubmitting = false; }, 1500);
