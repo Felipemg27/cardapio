@@ -72,11 +72,11 @@ a { text-decoration: none; color: inherit; }
 }
 .cart-btn.has-items .cart-badge { background: var(--cor-verde); }
 
-/* Hero - preto/cinza com brasa */
+/* Hero - preto/cinza com brasa + churrasqueira */
 .hero-simples {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 45%, #2a1a0f 70%, #3a1f0a 100%);
+  background: linear-gradient(rgba(0,0,0,0.72), rgba(10,10,10,0.85)), url('https://images.unsplash.com/photo-1558030006-450066393d65?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
   padding: 130px 0 70px; text-align: center; position: relative; overflow: hidden;
-  border-bottom: 2px solid rgba(255,107,53,0.12);
+  border-bottom: 2px solid rgba(255,107,53,0.15);
 }
 .hero-simples::before {
   content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
