@@ -504,44 +504,20 @@ function init(): void {
     const itens = cart.getItens();
     const total = cart.getTotal();
 
-    // abre janela sincronamente (evita popup blocker)
-    let win: Window | null = null;
-    try { win = window.open('about:blank', '_blank', 'noopener'); } catch { win = null; }
-
     if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.textContent = 'Enviando...'; }
     try {
       const pedido = await criarPedido(itens, cliente);
       showToast('Pedido #' + pedido.id.slice(0,8) + ' criado! Redirecionando para WhatsApp...');
-      console.log('[cardapio] WhatsApp link:', pedido.whatsappLink);
       const link = pedido.whatsappLink;
-      // tenta nova aba, fallback mesma aba (nunca bloqueado)
-      if (win && !win.closed) {
-        win.location.href = link;
-        setTimeout(() => { try { if (win && win.location.href === 'about:blank') win.location.href = link; } catch {} }, 500);
-      } else {
-        const w = window.open(link, '_blank', 'noopener');
-        if (!w) window.location.href = link;
-      }
-      // garante redirect mesmo se popup bloqueado: após 800ms navega na mesma aba
-      setTimeout(() => {
-        if (document.visibilityState === 'visible') {
-          console.log('[cardapio] fallback location.href');
-          // não força se já navegou
-        }
-      }, 800);
+      const w = window.open(link, '_blank', 'noopener');
+      if (!w) window.location.href = link;
     } catch (err: any) {
       console.warn('[cardapio] falha API, fallback local', err);
       const msg = buildMensagem(itens, total, cliente);
       const link = getWhatsAppLink(msg);
-      console.log('[cardapio] fallback link:', link);
-      if (win && !win.closed) {
-        win.location.href = link;
-      } else {
-        const w2 = window.open(link, '_blank', 'noopener');
-        if (!w2) window.location.href = link;
-      }
+      const w = window.open(link, '_blank', 'noopener');
+      if (!w) window.location.href = link;
       showToast('Redirecionando para WhatsApp...');
-      if (win && win.location.href === 'about:blank') try { win.close(); } catch {}
     } finally {
       if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.textContent = 'Enviar pedido no WhatsApp 💬'; }
     }
