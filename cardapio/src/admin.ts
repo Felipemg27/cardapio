@@ -176,7 +176,7 @@ function fillForm(p: Prato) {
   editingId = p.id;
   if (formTitle) formTitle.textContent = `Editando: ${p.nome}`;
   if (fIdOrig) fIdOrig.value = p.id;
-  if (fId) { fId.value = p.id; fId.disabled = true; }
+  if (fId) { fId.value = p.id; fId.disabled = false; }
   if (fCategoria) fCategoria.value = p.categoria;
   if (fNome) fNome.value = p.nome;
   if (fPreco) fPreco.value = String(p.preco);
@@ -225,9 +225,8 @@ form?.addEventListener('submit', async (e) => {
   if (formMsg) { formMsg.textContent = 'Salvando...'; formMsg.style.color = '#636e72'; }
   try {
     if (editingId) {
-      // edição: id não muda, envia sem id
-      const { id: _omit, ...rest } = payload;
-      await atualizarPrato(editingId, rest);
+      // permite alterar id: envia payload completo com novo id, rota usa :id original
+      await atualizarPrato(editingId, payload);
       showToast('Prato atualizado!');
     } else {
       await criarPrato(payload);

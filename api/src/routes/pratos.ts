@@ -70,14 +70,20 @@ router.post('/', requireAdmin, (req, res) => {
   res.status(201).json(novo);
 });
 
-// PUT /api/pratos/:id — admin only
+// PUT /api/pratos/:id — admin only (permite alterar id)
 router.put('/:id', requireAdmin, (req, res) => {
   const pratos = loadPratos();
   const idx = pratos.findIndex((p) => p.id === req.params.id);
   if (idx === -1) return res.status(404).json({ erro: 'Prato não encontrado' });
-  const err = validarPrato({ ...pratos[idx], ...req.body, id: pratos[idx].id }, true);
+  const idOriginal = pratos[idx].id;
+  const novoId = req.body.id ? String(req.body.id).trim() : idOriginal;
+  if (novoId !== idOriginal && pratos.find((p) => p.id === novoId)) {
+    return res.status(409).json({ erro: 'novo id já existe' });
+  }
+  const toValidate = { ...pratos[idx], ...req.body, id: novoId };
+  const err = validarPrato(toValidate, true);
   if (err) return res.status(400).json({ erro: err });
-  const atualizado = { ...pratos[idx], ...req.body, id: pratos[idx].id };
+  const atualizado = { ...pratos[idx], ...req.body, id: novoId };
   pratos[idx] = atualizado;
   savePratos(pratos);
   res.json(atualizado);
