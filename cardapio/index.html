@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio - Sabor & Brasa | Peça pelo WhatsApp</title>
+  <meta name="description" content="Cardápio Sabor & Brasa — lanches, pizzas, pratos principais, bebidas e sobremesas. Monte seu pedido e finalize direto no WhatsApp.">
+  <link rel="preconnect" href="https://picsum.photos">
+  <link rel="preconnect" href="https://accounts.google.com">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#inicio" class="logo">SABOR <span>& BRASA</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <!-- Auth: login Google / user menu -->
+        <div id="auth-area" class="auth-area">
+          <button class="btn-login" id="btn-login" aria-label="Entrar com Google">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.97 6.97 0 0 1 5.48 12c0-.72.13-1.42.36-2.09V7.07H2.18A10.98 10.98 0 0 0 1 12c0 1.78.42 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            <span>Entrar</span>
+          </button>
+          <div id="user-menu" class="user-menu hidden">
+            <button class="user-trigger" id="user-trigger" aria-label="Menu do usuário">
+              <img id="user-avatar" src="" alt="" class="user-avatar hidden">
+              <span id="user-initial" class="user-initial"></span>
+              <span id="user-name" class="user-name"></span>
+              <span class="user-chevron">▾</span>
+            </button>
+            <div class="user-dropdown" id="user-dropdown">
+              <div class="user-dropdown-header">
+                <strong id="dropdown-name"></strong>
+                <span id="dropdown-email"></span>
+              </div>
+              <button class="dropdown-item" id="btn-logout">Sair</button>
+            </div>
+          </div>
+        </div>
+        <button class="cart-btn" id="cart-btn" aria-label="Abrir carrinho">
+          🛒 <span>Carrinho</span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="inicio" class="hero-simples">
+    <div class="container" style="text-align:center; position:relative;">
+      <h1>Sabor que dá água<br><span>na boca</span></h1>
+      <p>Monte seu pedido e finalize direto no WhatsApp — rápido e sem cadastro</p>
+      <a href="#cardapio" class="btn-primario">Ver Cardápio</a>
+      <p style="margin-top:14px; font-size:0.9rem; opacity:0.9;">⏱️ Entrega em até 40 min • Retirada no local</p>
+    </div>
+  </section>
+
+  <main>
+    <section id="cardapio" class="container" style="padding: 50px 20px;">
+      <h2 class="section-title" style="margin-bottom: 10px;">Cardápio</h2>
+      <p style="text-align:center; color:#6b6b6b; margin-bottom:28px;">Escolha seus pratos e adicione ao carrinho 🍔🍕</p>
+
+      <div class="filtros-grid" style="margin-bottom: 32px;">
+        <div class="filtro-item">
+          <label for="filtro-categoria">Categoria</label>
+          <select id="filtro-categoria">
+            <option value="todos">Todas</option>
+            <option value="entrada">Entradas</option>
+            <option value="principal">Pratos Principais</option>
+            <option value="lanche">Lanches</option>
+            <option value="bebida">Bebidas</option>
+            <option value="sobremesa">Sobremesas</option>
+          </select>
+        </div>
+        <div class="filtro-item">
+          <label for="busca">Buscar</label>
+          <input type="text" id="busca" placeholder="Ex: pizza, burger, suco...">
+        </div>
+      </div>
+
+      <div class="produtos-grid" id="catalogo-grid">
+        <!-- Cards serão injetados via TS a partir de pratos.json + fallback estático para SEO/no-JS -->
+        <!-- Fallback estático espelha pratos.json (14 itens) -->
+        <article class="prato-card" data-categoria="lanche" data-id="x-burger-classico" data-preco="32.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/burger1/600/400" alt="X-Burger Clássico" loading="lazy" decoding="async">
+            <span class="badge badge-promocao">-15%</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Lanche</span>
+            <h3 class="prato-nome">X-Burger Clássico</h3>
+            <p class="prato-desc">Pão brioche, blend 160g, queijo cheddar, alface, tomate e maionese da casa.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 32,90</span><span class="preco-antigo">R$ 38,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus" aria-label="Diminuir">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus" aria-label="Aumentar">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="principal" data-id="pizza-margherita" data-preco="54.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/pizza1/600/400" alt="Pizza Margherita" loading="lazy" decoding="async">
+            <span class="badge badge-mais-pedido">Mais pedido</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Prato Principal</span>
+            <h3 class="prato-nome">Pizza Margherita</h3>
+            <p class="prato-desc">Molho de tomate artesanal, mussarela fresca, manjericão e azeite. 8 fatias.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 54,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="entrada" data-id="batata-rustica" data-preco="28.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/batata/600/400" alt="Batata Rústica" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Entrada</span>
+            <h3 class="prato-nome">Batata Rústica</h3>
+            <p class="prato-desc">Porção 400g com páprica, alecrim e molho aioli.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 28,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="principal" data-id="parmegiana-frango" data-preco="68.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/parmegiana/600/400" alt="Parmegiana de Frango" loading="lazy" decoding="async">
+            <span class="badge badge-new">Novo</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Prato Principal</span>
+            <h3 class="prato-nome">Parmegiana de Frango</h3>
+            <p class="prato-desc">Filé empanado, pomodoro, mussarela, arroz e fritas. Serve 2.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 68,90</span><span class="preco-antigo">R$ 79,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="entrada" data-id="caesar-salada" data-preco="34.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/salada/600/400" alt="Salada Caesar" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Entrada</span>
+            <h3 class="prato-nome">Salada Caesar</h3>
+            <p class="prato-desc">Alface, croutons, parmesão, frango grelhado e molho caesar.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 34,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="bebida" data-id="coca-350" data-preco="6">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/coca/600/400" alt="Coca-Cola 350ml" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Bebida</span>
+            <h3 class="prato-nome">Coca-Cola 350ml</h3>
+            <p class="prato-desc">Lata gelada. Normal ou zero.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 6,00</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="sobremesa" data-id="açaí-500" data-preco="24.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/acai/600/400" alt="Açaí 500ml" loading="lazy" decoding="async">
+            <span class="badge badge-mais-pedido">Mais pedido</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Sobremesa</span>
+            <h3 class="prato-nome">Açaí 500ml</h3>
+            <p class="prato-desc">Açaí puro com leite condensado, granola, banana e morango.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 24,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="lanche" data-id="x-bacon-duplo" data-preco="42.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/bacon/600/400" alt="X-Bacon Duplo" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Lanche</span>
+            <h3 class="prato-nome">X-Bacon Duplo</h3>
+            <p class="prato-desc">Dois blends 160g, bacon, cheddar duplo, picles e barbecue.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 42,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="principal" data-id="feijoada-completa" data-preco="89.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/feijoada/600/400" alt="Feijoada Completa" loading="lazy" decoding="async">
+            <span class="badge badge-new">Novo</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Prato Principal</span>
+            <h3 class="prato-nome">Feijoada Completa</h3>
+            <p class="prato-desc">Arroz, couve, torresmo, vinagrete e laranja. Serve 2.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 89,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="bebida" data-id="suco-natural" data-preco="9.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/suco/600/400" alt="Suco Natural" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Bebida</span>
+            <h3 class="prato-nome">Suco Natural 400ml</h3>
+            <p class="prato-desc">Laranja, limão, maracujá ou abacaxi. Feito na hora.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 9,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="sobremesa" data-id="pudim-caseiro" data-preco="12.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/pudim/600/400" alt="Pudim Caseiro" loading="lazy" decoding="async">
+            <span class="badge badge-promocao">-20%</span>
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Sobremesa</span>
+            <h3 class="prato-nome">Pudim Caseiro</h3>
+            <p class="prato-desc">Fatia generosa de pudim com calda de caramelo.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 12,90</span><span class="preco-antigo">R$ 15,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="entrada" data-id="coxinha-6un" data-preco="22.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/coxinha/600/400" alt="Coxinha 6 unidades" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Entrada</span>
+            <h3 class="prato-nome">Coxinha 6 unidades</h3>
+            <p class="prato-desc">Coxinhas de frango cremosas, massa leve e crocante.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 22,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="bebida" data-id="cerveja-longneck" data-preco="7.5">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/cerveja/600/400" alt="Cerveja Long Neck" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Bebida</span>
+            <h3 class="prato-nome">Cerveja Long Neck 355ml</h3>
+            <p class="prato-desc">Heineken, Budweiser ou Stella geladíssima.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 7,50</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="principal" data-id="pizza-calabresa" data-preco="52.9">
+          <div class="prato-imagem">
+            <img src="https://picsum.photos/seed/pizza2/600/400" alt="Pizza Calabresa" loading="lazy" decoding="async">
+          </div>
+          <div class="prato-info">
+            <span class="prato-categoria">Prato Principal</span>
+            <h3 class="prato-nome">Pizza Calabresa</h3>
+            <p class="prato-desc">Calabresa, cebola roxa, mussarela e orégano.</p>
+            <div class="prato-preco"><span class="preco-atual">R$ 52,90</span></div>
+            <div class="prato-actions">
+              <div class="qtd-stepper"><button type="button" class="qtd-minus">−</button><span class="qtd-value">1</span><button type="button" class="qtd-plus">+</button></div>
+              <button type="button" class="btn-add">Adicionar 🛒</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section id="contato" class="contato">
+    <div class="container">
+      <div class="contato-header">
+        <span class="contato-badge">✦ Peça agora</span>
+        <h2 class="section-title" style="margin-bottom: 12px;">Entre em Contato</h2>
+        <p>Finalize no WhatsApp ou tire dúvidas — resposta em minutos</p>
+      </div>
+      <div class="contato-grid">
+        <a href="https://wa.me/5521987004814" target="_blank" class="contato-card contato-card--whatsapp">
+          <div class="contato-icone-wrap"><div class="contato-icone">💬</div></div>
+          <h3>WhatsApp</h3>
+          <p class="contato-valor">(21) 98700-4814</p>
+          <span class="contato-cta">Chamar agora →</span>
+          <span class="contato-sub">Resposta em até 5 min</span>
+        </a>
+        <div class="contato-card contato-card--horario">
+          <div class="contato-icone-wrap"><div class="contato-icone">⏰</div></div>
+          <h3>Horário</h3>
+          <p class="contato-valor">Seg – Dom: 11h às 23h</p>
+          <p class="contato-sub" style="margin-top:4px;">Entrega e retirada todos os dias</p>
+          <span class="contato-status"><span class="status-dot"></span> Aberto agora</span>
+        </div>
+        <a href="https://maps.google.com/?q=Rua+Exemplo+123+São+Paulo" target="_blank" class="contato-card contato-card--email">
+          <div class="contato-icone-wrap"><div class="contato-icone">📍</div></div>
+          <h3>Endereço</h3>
+          <p class="contato-valor" style="font-size:0.95rem;">Rua Exemplo, 123 — São Paulo</p>
+          <span class="contato-cta">Ver no mapa →</span>
+          <span class="contato-sub">Retirada no local</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="text-align:center;">
+      <p>2026 Sabor & Brasa • Cardápio digital — pedido via WhatsApp</p>
+      <p style="margin-top:8px; font-size:0.85rem; color:rgba(255,255,255,0.8);">(21) 98700-4814 • Rua Exemplo, 123 — São Paulo</p>
+    </div>
+  </footer>
+
+  <!-- Drawer Carrinho -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho">
+    <div class="cart-header">
+      <h3>🛒 Seu Pedido</h3>
+      <button class="cart-close" id="cart-close" aria-label="Fechar carrinho">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- itens via JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><span id="cart-total">R$ 0,00</span></div>
+      <button class="btn-checkout" id="btn-checkout" disabled>Finalizar no WhatsApp 💬</button>
+      <p id="checkout-login-hint" class="checkout-hint hidden">🔒 Faça login com Google para finalizar o pedido</p>
+      <button type="button" class="btn-clear" id="btn-clear">Limpar carrinho</button>
+    </div>
+  </aside>
+
+  <!-- Modal Checkout -->
+  <div class="modal-overlay" id="checkout-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h3 id="modal-title">Finalizar pedido</h3>
+        <button class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkout-form" novalidate>
+          <div class="form-grid">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cli-nome">Nome <span>*</span></label>
+                <input type="text" id="cli-nome" placeholder="Seu nome" required autocomplete="name">
+                <span class="field-error" id="err-nome">Informe seu nome</span>
+              </div>
+              <div class="form-group">
+                <label for="cli-telefone">Telefone <span>*</span></label>
+                <input type="tel" id="cli-telefone" placeholder="(21) 98700-4814" required autocomplete="tel">
+                <span class="field-error" id="err-telefone">Informe um telefone válido</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Como quer receber? <span>*</span></label>
+              <div class="tipo-entrega">
+                <button type="button" class="tipo-btn active" data-tipo="entrega">🛵 Entrega</button>
+                <button type="button" class="tipo-btn" data-tipo="retirada">🏪 Retirada</button>
+              </div>
+              <input type="hidden" id="cli-tipo" value="entrega">
+            </div>
+
+            <div class="form-group" id="group-endereco">
+              <label for="cli-endereco">Endereço <span>*</span></label>
+              <input type="text" id="cli-endereco" placeholder="Rua, número, bairro, complemento" autocomplete="street-address">
+              <span class="field-error" id="err-endereco">Informe o endereço para entrega</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cli-pagamento">Pagamento <span>*</span></label>
+                <select id="cli-pagamento" required>
+                  <option value="">Selecione</option>
+                  <option value="PIX">PIX</option>
+                  <option value="Cartão na entrega">Cartão na entrega</option>
+                  <option value="Dinheiro">Dinheiro (precisa troco?)</option>
+                </select>
+                <span class="field-error" id="err-pagamento">Selecione a forma de pagamento</span>
+              </div>
+              <div class="form-group" id="group-troco" style="display:none;">
+                <label for="cli-troco">Troco para quanto?</label>
+                <input type="text" id="cli-troco" placeholder="Ex: R$ 100,00">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cli-obs">Observações</label>
+              <textarea id="cli-obs" placeholder="Ex: sem cebola, ponto da carne, etc."></textarea>
+            </div>
+
+            <div class="resumo-pedido" id="resumo-pedido">
+              <!-- preenchido via JS -->
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar pedido no WhatsApp 💬</button>
+            <p style="text-align:center; font-size:0.78rem; color:#8a8a8a; margin-top:6px;">Você será redirecionado para o WhatsApp com a mensagem pronta</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Login Google -->
+  <div class="modal-overlay" id="login-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title" style="max-width:420px;">
+      <div class="modal-header">
+        <h3 id="login-title">Entrar</h3>
+        <button class="modal-close" id="login-close" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.92rem; color:#636e72; margin-bottom:16px; text-align:center;">Entre com sua conta Google para acelerar o checkout</p>
+        <div id="g_id_signin" style="display:flex; justify-content:center; margin-bottom:16px;"></div>
+        <div class="login-divider"><span>ou</span></div>
+        <form id="login-demo-form" novalidate>
+          <p style="font-size:0.85rem; color:#8a8a8a; margin-bottom:10px; text-align:center;">Modo demonstração (sem Google configurado)</p>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label for="login-nome">Nome</label>
+            <input type="text" id="login-nome" placeholder="Seu nome" autocomplete="name">
+          </div>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+          </div>
+          <button type="submit" class="btn-enviar" style="margin-top:0; background: linear-gradient(135deg, var(--cor-primary), var(--cor-primary-2));">Entrar em modo demo</button>
+        </form>
+        <p style="text-align:center; font-size:0.75rem; color:#8a8a8a; margin-top:12px;">Ao entrar, você autoriza o uso de nome e e-mail para preencher o pedido.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="src/main.ts"></script>
+</body>
+</html>

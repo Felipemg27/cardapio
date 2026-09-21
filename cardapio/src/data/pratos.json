@@ -1,0 +1,137 @@
+[
+  {
+    "id": "x-burger-classico",
+    "categoria": "lanche",
+    "nome": "X-Burger Clássico",
+    "descricao": "Pão brioche, blend 160g, queijo cheddar, alface, tomate e maionese da casa.",
+    "preco": 32.9,
+    "precoAntigo": 38.9,
+    "badge": { "tipo": "promocao", "label": "-15%" },
+    "imagem": "https://picsum.photos/seed/burger1/600/400",
+    "alt": "X-Burger Clássico"
+  },
+  {
+    "id": "pizza-margherita",
+    "categoria": "principal",
+    "nome": "Pizza Margherita",
+    "descricao": "Molho de tomate artesanal, mussarela fresca, manjericão e azeite extra virgem. 8 fatias.",
+    "preco": 54.9,
+    "badge": { "tipo": "mais-pedido", "label": "Mais pedido" },
+    "imagem": "https://picsum.photos/seed/pizza1/600/400",
+    "alt": "Pizza Margherita"
+  },
+  {
+    "id": "batata-rustica",
+    "categoria": "entrada",
+    "nome": "Batata Rústica",
+    "descricao": "Porção 400g com páprica, alecrim e molho aioli. Crocante por fora, macia por dentro.",
+    "preco": 28.9,
+    "imagem": "https://picsum.photos/seed/batata/600/400",
+    "alt": "Batata Rústica"
+  },
+  {
+    "id": "parmegiana-frango",
+    "categoria": "principal",
+    "nome": "Parmegiana de Frango",
+    "descricao": "Filé empanado, molho pomodoro, mussarela gratinada, arroz e fritas. Serve 2.",
+    "preco": 68.9,
+    "precoAntigo": 79.9,
+    "badge": { "tipo": "new", "label": "Novo" },
+    "imagem": "https://picsum.photos/seed/parmegiana/600/400",
+    "alt": "Parmegiana de Frango"
+  },
+  {
+    "id": "caesar-salada",
+    "categoria": "entrada",
+    "nome": "Salada Caesar",
+    "descricao": "Alface americana, croutons, parmesão, frango grelhado e molho caesar cremoso.",
+    "preco": 34.9,
+    "imagem": "https://picsum.photos/seed/salada/600/400",
+    "alt": "Salada Caesar"
+  },
+  {
+    "id": "coca-350",
+    "categoria": "bebida",
+    "nome": "Coca-Cola 350ml",
+    "descricao": "Lata gelada. Escolha: normal ou zero.",
+    "preco": 6.0,
+    "imagem": "https://picsum.photos/seed/coca/600/400",
+    "alt": "Coca-Cola 350ml"
+  },
+  {
+    "id": "açaí-500",
+    "categoria": "sobremesa",
+    "nome": "Açaí 500ml",
+    "descricao": "Açaí puro com leite condensado, granola, banana e morango.",
+    "preco": 24.9,
+    "badge": { "tipo": "mais-pedido", "label": "Mais pedido" },
+    "imagem": "https://picsum.photos/seed/acai/600/400",
+    "alt": "Açaí 500ml"
+  },
+  {
+    "id": "x-bacon-duplo",
+    "categoria": "lanche",
+    "nome": "X-Bacon Duplo",
+    "descricao": "Dois blends 160g, bacon crocante, cheddar duplo, picles e barbecue.",
+    "preco": 42.9,
+    "imagem": "https://picsum.photos/seed/bacon/600/400",
+    "alt": "X-Bacon Duplo"
+  },
+  {
+    "id": "feijoada-completa",
+    "categoria": "principal",
+    "nome": "Feijoada Completa",
+    "descricao": "Feijoada tradicional, arroz, couve, torresmo, vinagrete e laranja. Serve 2.",
+    "preco": 89.9,
+    "badge": { "tipo": "new", "label": "Novo" },
+    "imagem": "https://picsum.photos/seed/feijoada/600/400",
+    "alt": "Feijoada Completa"
+  },
+  {
+    "id": "suco-natural",
+    "categoria": "bebida",
+    "nome": "Suco Natural 400ml",
+    "descricao": "Laranja, limão, maracujá ou abacaxi. Feito na hora, sem conservantes.",
+    "preco": 9.9,
+    "imagem": "https://picsum.photos/seed/suco/600/400",
+    "alt": "Suco Natural"
+  },
+  {
+    "id": "pudim-caseiro",
+    "categoria": "sobremesa",
+    "nome": "Pudim Caseiro",
+    "descricao": "Fatia generosa de pudim de leite condensado com calda de caramelo.",
+    "preco": 12.9,
+    "precoAntigo": 15.9,
+    "badge": { "tipo": "promocao", "label": "-20%" },
+    "imagem": "https://picsum.photos/seed/pudim/600/400",
+    "alt": "Pudim Caseiro"
+  },
+  {
+    "id": "coxinha-6un",
+    "categoria": "entrada",
+    "nome": "Coxinha 6 unidades",
+    "descricao": "Coxinhas de frango cremosas, massa leve e crocante. Acompanha ketchup e mostarda.",
+    "preco": 22.9,
+    "imagem": "https://picsum.photos/seed/coxinha/600/400",
+    "alt": "Coxinha 6 unidades"
+  },
+  {
+    "id": "cerveja-longneck",
+    "categoria": "bebida",
+    "nome": "Cerveja Long Neck 355ml",
+    "descricao": "Heineken, Budweiser ou Stella geladíssima.",
+    "preco": 7.5,
+    "imagem": "https://picsum.photos/seed/cerveja/600/400",
+    "alt": "Cerveja Long Neck"
+  },
+  {
+    "id": "pizza-calabresa",
+    "categoria": "principal",
+    "nome": "Pizza Calabresa",
+    "descricao": "Calabresa fatiada, cebola roxa, mussarela e orégano. Massa de fermentação lenta.",
+    "preco": 52.9,
+    "imagem": "https://picsum.photos/seed/pizza2/600/400",
+    "alt": "Pizza Calabresa"
+  }
+]
