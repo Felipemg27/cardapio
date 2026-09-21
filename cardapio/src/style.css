@@ -149,7 +149,7 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer; color: var(--cor-primary); transition: background 0.15s; display: grid; place-items: center;
 }
 .qtd-stepper button:hover { background: rgba(192,57,43,0.08); }
-.qtd-stepper span { min-width: 32px; text-align: center; font-weight: 700; font-size: 0.95rem; }
+.qtd-stepper span { min-width: 32px; text-align: center; font-weight: 700; font-size: 0.95rem; color: #0a0a0a; }
 .btn-add {
   flex: 1; padding: 10px 14px; background: linear-gradient(135deg, var(--cor-primary), var(--cor-primary-2));
   color: #fff; border: none; border-radius: 999px; font-size: 0.88rem; font-weight: 700; cursor: pointer;
@@ -186,7 +186,7 @@ a { text-decoration: none; color: inherit; }
 .cart-item-qtd { display: flex; align-items: center; gap: 6px; border: 1.2px solid #f0d0c0; border-radius: 999px; padding: 2px; background: #fff; }
 .cart-item-qtd button { width: 26px; height: 26px; border-radius: 999px; border: none; background: #fff8f0; color: var(--cor-primary); font-weight: 700; cursor: pointer; display: grid; place-items: center; font-size: 0.9rem; }
 .cart-item-qtd button:hover { background: var(--cor-primary); color: #fff; }
-.cart-item-qtd span { min-width: 22px; text-align: center; font-weight: 700; font-size: 0.85rem; }
+.cart-item-qtd span { min-width: 22px; text-align: center; font-weight: 700; font-size: 0.85rem; color: #0a0a0a; }
 .cart-item-remove { background: none; border: none; color: var(--cor-cinza); font-size: 0.78rem; cursor: pointer; text-decoration: underline; padding: 4px; }
 .cart-item-remove:hover { color: var(--cor-vermelho); }
 .cart-footer { padding: 16px 20px 20px; border-top: 1px solid #2a2a2a; background: #161616; }
