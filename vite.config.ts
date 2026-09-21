@@ -11,7 +11,10 @@ export default defineConfig({
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
     rollupOptions: {
-      input: resolve(__dirname, 'cardapio/index.html')
+      input: {
+        main: resolve(__dirname, 'cardapio/index.html'),
+        admin: resolve(__dirname, 'cardapio/admin.html'),
+      }
     }
   },
   server: {

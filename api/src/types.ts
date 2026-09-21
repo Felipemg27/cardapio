@@ -51,5 +51,6 @@ export interface User {
   email: string;
   avatar?: string;
   provider: 'google' | 'demo';
+  role: 'admin' | 'user';
   criadoEm: string;
 }

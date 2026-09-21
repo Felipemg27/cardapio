@@ -5,6 +5,18 @@ import type { User } from '../types.js';
 
 const router = Router();
 
+// --- admin check: lista de e-mails admin via env ADMIN_EMAILS ou ADMIN_EMAIL (case-insensitive) ---
+function getAdminEmails(): Set<string> {
+  const raw = process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || 'felipemq123@outlook.com';
+  return new Set(raw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean));
+}
+function isAdminEmail(email: string): boolean {
+  return getAdminEmails().has(email.trim().toLowerCase());
+}
+function toRole(email: string): 'admin' | 'user' {
+  return isAdminEmail(email) ? 'admin' : 'user';
+}
+
 function loadUsers(): User[] {
   return readJson<User[]>(paths.USERS_FILE, []);
 }
@@ -76,6 +88,7 @@ router.post('/google', async (req, res) => {
       email: googleUser.email,
       avatar: googleUser.picture,
       provider: 'google',
+      role: toRole(googleUser.email),
       criadoEm: new Date().toISOString(),
     };
     users.push(user);
@@ -86,11 +99,14 @@ router.post('/google', async (req, res) => {
     if (googleUser.name && user.nome !== googleUser.name) { user.nome = googleUser.name; changed = true; }
     if (googleUser.picture && user.avatar !== googleUser.picture) { user.avatar = googleUser.picture; changed = true; }
     if (!user.googleId) { user.googleId = googleUser.sub; changed = true; }
+    const expectedRole = toRole(googleUser.email);
+    if (user.role !== expectedRole) { user.role = expectedRole; changed = true; }
+    if (!user.role) { user.role = expectedRole; changed = true; }
     if (changed) saveUsers(users);
   }
 
   // gera token simples (base64 do user id + timestamp) — em prod usar JWT assinado
-  const appToken = Buffer.from(JSON.stringify({ uid: user.id, email: user.email, ts: Date.now() })).toString('base64url');
+  const appToken = Buffer.from(JSON.stringify({ uid: user.id, email: user.email, role: user.role, ts: Date.now() })).toString('base64url');
 
   res.json({ user, token: appToken });
 });
@@ -99,20 +115,26 @@ router.post('/google', async (req, res) => {
 router.post('/demo', (req, res) => {
   const { nome, email } = req.body as { nome?: string; email?: string };
   if (!nome?.trim() || !email?.trim()) return res.status(400).json({ erro: 'nome e email obrigatórios' });
+  const emailNorm = email.trim().toLowerCase();
   const users = loadUsers();
-  let user = users.find((u) => u.email === email);
+  let user = users.find((u) => u.email === emailNorm);
   if (!user) {
     user = {
       id: randomUUID(),
       nome: nome.trim(),
-      email: email.trim().toLowerCase(),
+      email: emailNorm,
       provider: 'demo',
+      role: toRole(emailNorm),
       criadoEm: new Date().toISOString(),
     };
     users.push(user);
     saveUsers(users);
+  } else {
+    // atualiza role se admin list mudou
+    const expectedRole = toRole(emailNorm);
+    if (user.role !== expectedRole) { user.role = expectedRole; saveUsers(users); }
   }
-  const appToken = Buffer.from(JSON.stringify({ uid: user.id, email: user.email, ts: Date.now() })).toString('base64url');
+  const appToken = Buffer.from(JSON.stringify({ uid: user.id, email: user.email, role: user.role, ts: Date.now() })).toString('base64url');
   res.json({ user, token: appToken });
 });
 
@@ -137,5 +159,41 @@ router.get('/users', (_req, res) => {
   const users = loadUsers();
   res.json(users);
 });
+
+// --- middleware exports para reuso ---
+export function getAuthUserFromRequest(req: any): User | null {
+  const auth = req.headers?.authorization as string | undefined;
+  if (!auth?.startsWith('Bearer ')) return null;
+  const token = auth.slice(7);
+  try {
+    const payload = JSON.parse(Buffer.from(token, 'base64url').toString('utf-8'));
+    const users = loadUsers();
+    const user = users.find((u) => u.id === payload.uid);
+    if (!user) return null;
+    // garante role atualizada
+    const expectedRole = toRole(user.email);
+    if (user.role !== expectedRole) {
+      user.role = expectedRole;
+      saveUsers(users);
+    }
+    return user;
+  } catch {
+    return null;
+  }
+}
+export function requireAuth(req: any, res: any, next: any) {
+  const user = getAuthUserFromRequest(req);
+  if (!user) return res.status(401).json({ erro: 'Autenticação necessária' });
+  (req as any).user = user;
+  next();
+}
+export function requireAdmin(req: any, res: any, next: any) {
+  const user = getAuthUserFromRequest(req);
+  if (!user) return res.status(401).json({ erro: 'Autenticação necessária' });
+  if (user.role !== 'admin') return res.status(403).json({ erro: 'Acesso admin necessário', email: user.email });
+  (req as any).user = user;
+  next();
+}
+export { getAdminEmails, isAdminEmail };
 
 export default router;

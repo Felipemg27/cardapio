@@ -196,9 +196,11 @@ function init(): void {
 
   function renderAuth(): void {
     const user = auth.getUser();
+    const adminLink = document.getElementById('admin-link') as HTMLElement | null;
     if (user) {
       btnLogin?.classList.add('hidden');
       userMenu?.classList.remove('hidden');
+      if (adminLink) adminLink.classList.toggle('hidden', user.role !== 'admin');
       if (userNameEl) userNameEl.textContent = user.nome.split(' ')[0];
       if (dropdownName) dropdownName.textContent = user.nome;
       if (dropdownEmail) dropdownEmail.textContent = user.email;
@@ -217,6 +219,7 @@ function init(): void {
     } else {
       btnLogin?.classList.remove('hidden');
       userMenu?.classList.add('hidden');
+      adminLink?.classList.add('hidden');
       userDropdown?.classList.remove('open');
     }
   }

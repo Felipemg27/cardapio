@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { readJson, writeJson, paths } from '../store.js';
 import type { Prato } from '../types.js';
+import { requireAdmin } from './auth.js';
 
 const router = Router();
 
@@ -45,8 +46,8 @@ router.get('/:id', (req, res) => {
   res.json(prato);
 });
 
-// POST /api/pratos
-router.post('/', (req, res) => {
+// POST /api/pratos — admin only
+router.post('/', requireAdmin, (req, res) => {
   const err = validarPrato(req.body);
   if (err) return res.status(400).json({ erro: err });
   const pratos = loadPratos();
@@ -69,8 +70,8 @@ router.post('/', (req, res) => {
   res.status(201).json(novo);
 });
 
-// PUT /api/pratos/:id
-router.put('/:id', (req, res) => {
+// PUT /api/pratos/:id — admin only
+router.put('/:id', requireAdmin, (req, res) => {
   const pratos = loadPratos();
   const idx = pratos.findIndex((p) => p.id === req.params.id);
   if (idx === -1) return res.status(404).json({ erro: 'Prato não encontrado' });
@@ -82,8 +83,8 @@ router.put('/:id', (req, res) => {
   res.json(atualizado);
 });
 
-// DELETE /api/pratos/:id
-router.delete('/:id', (req, res) => {
+// DELETE /api/pratos/:id — admin only
+router.delete('/:id', requireAdmin, (req, res) => {
   const pratos = loadPratos();
   const idx = pratos.findIndex((p) => p.id === req.params.id);
   if (idx === -1) return res.status(404).json({ erro: 'Prato não encontrado' });
