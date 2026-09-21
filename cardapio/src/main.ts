@@ -554,6 +554,23 @@ function init(): void {
         showToast('Pop-up bloqueado: permita pop-ups ou clique aqui para abrir WhatsApp');
       }
     }
+    // agradecimento + volta ao inicio: limpa carrinho, fecha modais, toast e scroll topo
+    try {
+      cart.clear();
+      checkoutForm.reset();
+      // reseta tipo para entrega
+      if (cliTipo) cliTipo.value = 'entrega';
+      document.querySelectorAll('.tipo-btn').forEach(b => b.classList.toggle('active', (b as HTMLElement).dataset.tipo === 'entrega'));
+      if (groupEndereco) groupEndereco.style.display = '';
+      closeCheckout();
+      closeCart();
+      showToast('Obrigado pelo pedido! 🙏 Já abrimos o WhatsApp em nova guia. Em breve retornaremos contato.');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // foca inicio
+        document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
+    } catch (e) { console.warn('[checkout] pos-envio', e); }
     } finally {
       if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.textContent = 'Enviar pedido no WhatsApp 💬'; }
       setTimeout(() => { checkoutSubmitting = false; }, 1500);
