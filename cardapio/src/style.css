@@ -284,9 +284,9 @@ a.contato-card:hover .contato-icone-wrap { transform: scale(1.05) rotate(2deg); 
 .contato-icone { font-size: 1.7rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
 .contato-card h3 { font-size: 0.85rem; color: var(--cor-cinza); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .contato-valor { font-size: 1.05rem; font-weight: 700; color: var(--cor-texto); word-break: break-all; }
-.contato-cta { display: inline-block; margin-top: 14px; background: var(--cor-texto); color: #fff; font-size: 0.82rem; font-weight: 600; padding: 8px 16px; border-radius: 999px; transition: all 0.2s; }
-a.contato-card:hover .contato-cta { background: var(--cor-primary); transform: translateY(-1px); }
-.contato-card--whatsapp:hover .contato-cta { background: #128C7E; }
+.contato-cta { display: inline-block; margin-top: 14px; background: #0a0a0a; color: #fff; font-size: 0.82rem; font-weight: 600; padding: 8px 16px; border-radius: 999px; transition: all 0.2s; border: 1px solid #2a2a2a; }
+a.contato-card:hover .contato-cta { background: #000; transform: translateY(-1px); border-color: #000; }
+.contato-card--whatsapp:hover .contato-cta { background: #0a0a0a; }
 .contato-sub { font-size: 0.78rem; color: var(--cor-cinza); margin-top: 10px; }
 .contato-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 0.78rem; font-weight: 600; color: #27ae60; background: #eafaf1; padding: 6px 12px; border-radius: 999px; }
 .status-dot { width: 8px; height: 8px; background: #27ae60; border-radius: 50%; box-shadow: 0 0 0 6px rgba(39,174,96,0.15); animation: pulse-dot 2s infinite; }
