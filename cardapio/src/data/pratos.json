@@ -7,7 +7,7 @@
     "preco": 32.9,
     "precoAntigo": 38.9,
     "badge": { "tipo": "promocao", "label": "-15%" },
-    "imagem": "https://picsum.photos/seed/burger1/600/400",
+    "imagem": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?q=80&w=600&auto=format&fit=crop",
     "alt": "X-Burger Clássico"
   },
   {
@@ -17,7 +17,7 @@
     "descricao": "Molho de tomate artesanal, mussarela fresca, manjericão e azeite extra virgem. 8 fatias.",
     "preco": 54.9,
     "badge": { "tipo": "mais-pedido", "label": "Mais pedido" },
-    "imagem": "https://picsum.photos/seed/pizza1/600/400",
+    "imagem": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=600&auto=format&fit=crop",
     "alt": "Pizza Margherita"
   },
   {
@@ -26,7 +26,7 @@
     "nome": "Batata Rústica",
     "descricao": "Porção 400g com páprica, alecrim e molho aioli. Crocante por fora, macia por dentro.",
     "preco": 28.9,
-    "imagem": "https://picsum.photos/seed/batata/600/400",
+    "imagem": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&auto=format&fit=crop",
     "alt": "Batata Rústica"
   },
   {
@@ -37,7 +37,7 @@
     "preco": 68.9,
     "precoAntigo": 79.9,
     "badge": { "tipo": "new", "label": "Novo" },
-    "imagem": "https://picsum.photos/seed/parmegiana/600/400",
+    "imagem": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&auto=format&fit=crop",
     "alt": "Parmegiana de Frango"
   },
   {
@@ -46,7 +46,7 @@
     "nome": "Salada Caesar",
     "descricao": "Alface americana, croutons, parmesão, frango grelhado e molho caesar cremoso.",
     "preco": 34.9,
-    "imagem": "https://picsum.photos/seed/salada/600/400",
+    "imagem": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?q=80&w=600&auto=format&fit=crop",
     "alt": "Salada Caesar"
   },
   {
@@ -55,7 +55,7 @@
     "nome": "Coca-Cola 350ml",
     "descricao": "Lata gelada. Escolha: normal ou zero.",
     "preco": 6.0,
-    "imagem": "https://picsum.photos/seed/coca/600/400",
+    "imagem": "https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=600&auto=format&fit=crop",
     "alt": "Coca-Cola 350ml"
   },
   {
@@ -65,7 +65,7 @@
     "descricao": "Açaí puro com leite condensado, granola, banana e morango.",
     "preco": 24.9,
     "badge": { "tipo": "mais-pedido", "label": "Mais pedido" },
-    "imagem": "https://picsum.photos/seed/acai/600/400",
+    "imagem": "https://images.unsplash.com/photo-1488477181946-64290103bb53?q=80&w=600&auto=format&fit=crop",
     "alt": "Açaí 500ml"
   },
   {
@@ -74,7 +74,7 @@
     "nome": "X-Bacon Duplo",
     "descricao": "Dois blends 160g, bacon crocante, cheddar duplo, picles e barbecue.",
     "preco": 42.9,
-    "imagem": "https://picsum.photos/seed/bacon/600/400",
+    "imagem": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=600&auto=format&fit=crop",
     "alt": "X-Bacon Duplo"
   },
   {
@@ -84,7 +84,7 @@
     "descricao": "Feijoada tradicional, arroz, couve, torresmo, vinagrete e laranja. Serve 2.",
     "preco": 89.9,
     "badge": { "tipo": "new", "label": "Novo" },
-    "imagem": "https://picsum.photos/seed/feijoada/600/400",
+    "imagem": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop",
     "alt": "Feijoada Completa"
   },
   {
@@ -93,7 +93,7 @@
     "nome": "Suco Natural 400ml",
     "descricao": "Laranja, limão, maracujá ou abacaxi. Feito na hora, sem conservantes.",
     "preco": 9.9,
-    "imagem": "https://picsum.photos/seed/suco/600/400",
+    "imagem": "https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9e?q=80&w=600&auto=format&fit=crop",
     "alt": "Suco Natural"
   },
   {
@@ -104,7 +104,7 @@
     "preco": 12.9,
     "precoAntigo": 15.9,
     "badge": { "tipo": "promocao", "label": "-20%" },
-    "imagem": "https://picsum.photos/seed/pudim/600/400",
+    "imagem": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=600&auto=format&fit=crop",
     "alt": "Pudim Caseiro"
   },
   {
@@ -113,7 +113,7 @@
     "nome": "Coxinha 6 unidades",
     "descricao": "Coxinhas de frango cremosas, massa leve e crocante. Acompanha ketchup e mostarda.",
     "preco": 22.9,
-    "imagem": "https://picsum.photos/seed/coxinha/600/400",
+    "imagem": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=600&auto=format&fit=crop",
     "alt": "Coxinha 6 unidades"
   },
   {
@@ -122,7 +122,7 @@
     "nome": "Cerveja Long Neck 355ml",
     "descricao": "Heineken, Budweiser ou Stella geladíssima.",
     "preco": 7.5,
-    "imagem": "https://picsum.photos/seed/cerveja/600/400",
+    "imagem": "https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=600&auto=format&fit=crop",
     "alt": "Cerveja Long Neck"
   },
   {
@@ -131,7 +131,7 @@
     "nome": "Pizza Calabresa",
     "descricao": "Calabresa fatiada, cebola roxa, mussarela e orégano. Massa de fermentação lenta.",
     "preco": 52.9,
-    "imagem": "https://picsum.photos/seed/pizza2/600/400",
+    "imagem": "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop",
     "alt": "Pizza Calabresa"
   }
 ]
