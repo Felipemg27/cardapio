@@ -483,8 +483,10 @@ function init(): void {
     return ok;
   }
 
+  let checkoutSubmitting = false;
   checkoutForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (checkoutSubmitting) return;
     if (!isGoogleLogged()) {
       showToast('Faça login com Google para finalizar o pedido');
       closeCheckout();
@@ -504,6 +506,7 @@ function init(): void {
     const itens = cart.getItens();
     const total = cart.getTotal();
 
+    checkoutSubmitting = true;
     if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.textContent = 'Enviando...'; }
     try {
       const pedido = await criarPedido(itens, cliente);
@@ -520,6 +523,7 @@ function init(): void {
       showToast('Redirecionando para WhatsApp...');
     } finally {
       if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.textContent = 'Enviar pedido no WhatsApp 💬'; }
+      setTimeout(() => { checkoutSubmitting = false; }, 1500);
     }
   });
 }
