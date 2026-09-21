@@ -60,7 +60,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Cart button in navbar - mesmo estilo Ver Cardapio */
 .cart-btn {
-  position: relative; background: linear-gradient(135deg, #ff8c42, #ff6b35); color: #0a0a0a; border: none;
+  position: relative; background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; border: none;
   padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 0.9rem;
   cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: all 0.2s;
@@ -94,11 +94,11 @@ a { text-decoration: none; color: inherit; }
 .hero-simples h1 span { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.2); background: rgba(0,0,0,0.15); padding: 0 10px; border-radius: 8px; }
 .hero-simples p { color: #fff; font-size: 1.15rem; margin-bottom: 28px; opacity: 0.95; position: relative; }
 .btn-primario {
-  display: inline-block; background: linear-gradient(135deg, #ff8c42, #ff6b35); color: #0a0a0a; padding: 14px 32px; border-radius: 30px;
+  display: inline-block; background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; padding: 14px 32px; border-radius: 30px;
   font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, box-shadow 0.3s;
   position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: none;
 }
-.btn-primario:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: linear-gradient(135deg, #ffa060, #ff7b45); color: #0a0a0a; }
+.btn-primario:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: linear-gradient(135deg, #ff7b45, #ff4c2a); color: #0a0a0a; }
 
 /* Section */
 .section-title {
@@ -328,7 +328,7 @@ a.contato-card:hover .contato-cta { background: #000; transform: translateY(-1px
 .user-menu.hidden { display: none !important; }
 .user-trigger {
   display: inline-flex; align-items:center; gap: 8px;
-  background: linear-gradient(135deg, #ff8c42, #ff6b35); color: #0a0a0a; border: none;
+  background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; border: none;
   padding: 6px 12px 6px 6px; border-radius: 999px; font-weight: 700; font-size: 0.85rem;
   cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s;
 }
