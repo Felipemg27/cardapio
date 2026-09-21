@@ -140,7 +140,7 @@ a { text-decoration: none; color: inherit; }
 .prato-categoria { font-size: 0.75rem; color: var(--cor-secundaria); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
 .prato-desc { font-size: 0.88rem; color: #9a9a9a; margin-bottom: 14px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
 .prato-preco { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
-.preco-atual { font-size: 1.35rem; background: linear-gradient(135deg, var(--cor-primary), var(--cor-primary-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
+.preco-atual { font-size: 1.35rem; background: linear-gradient(135deg, #ff6b35, #ff3c1a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
 .preco-antigo { font-size: 0.9rem; color: var(--cor-cinza); text-decoration: line-through; }
 .prato-actions { display: flex; gap: 10px; align-items: center; }
 .qtd-stepper { display: flex; align-items: center; gap: 0; border: 1.5px solid #f0d0c0; border-radius: 999px; overflow: hidden; background: #fff8f0; }
@@ -180,7 +180,7 @@ a { text-decoration: none; color: inherit; }
 .cart-item img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #fff0e0; }
 .cart-item-info { flex: 1; min-width: 0; }
 .cart-item-nome { font-weight: 700; font-size: 0.92rem; line-height: 1.3; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cart-item-preco { font-size: 0.85rem; color: var(--cor-primary); font-weight: 700; }
+.cart-item-preco { font-size: 0.85rem; color: #ff6b35; font-weight: 700; }
 .cart-item-obs { font-size: 0.78rem; color: var(--cor-cinza); margin-top: 4px; font-style: italic; }
 .cart-item-actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
 .cart-item-qtd { display: flex; align-items: center; gap: 6px; border: 1.2px solid #f0d0c0; border-radius: 999px; padding: 2px; background: #fff; }
@@ -191,7 +191,7 @@ a { text-decoration: none; color: inherit; }
 .cart-item-remove:hover { color: var(--cor-vermelho); }
 .cart-footer { padding: 16px 20px 20px; border-top: 1px solid #2a2a2a; background: #161616; }
 .cart-total { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 1.15rem; margin-bottom: 14px; }
-.cart-total span:last-child { color: var(--cor-primary); }
+.cart-total span:last-child { color: #ff6b35; }
 .btn-checkout {
   width: 100%; padding: 14px; background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none;
   border-radius: 999px; font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -236,11 +236,11 @@ a { text-decoration: none; color: inherit; }
 }
 .tipo-btn.active { background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #fff; border-color: #ff6b35; box-shadow: 0 4px 12px rgba(255,107,53,0.3); }
 .resumo-pedido { background: #0f0f0f; border: 1.5px solid #2a2a2a; border-radius: 12px; padding: 14px; margin-top: 4px; }
-.resumo-pedido h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--cor-primary); margin-bottom: 10px; }
+.resumo-pedido h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.8px; color: #ff6b35; margin-bottom: 10px; }
 .resumo-linha { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 4px 0; gap: 12px; }
 .resumo-linha span:first-child { color: var(--cor-cinza); flex: 1; }
-.resumo-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1rem; border-top: 1.5px solid #f0d0c0; margin-top: 8px; padding-top: 10px; }
-.resumo-total span:last-child { color: var(--cor-primary); }
+.resumo-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1rem; border-top: 1.5px solid #2a2a2a; margin-top: 8px; padding-top: 10px; }
+.resumo-total span:last-child { color: #ff6b35; }
 .btn-enviar {
   width: 100%; margin-top: 16px; padding: 14px; background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none;
   border-radius: 999px; font-weight: 800; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
