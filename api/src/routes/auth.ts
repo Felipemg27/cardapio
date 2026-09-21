@@ -111,8 +111,10 @@ router.post('/google', async (req, res) => {
   res.json({ user, token: appToken });
 });
 
-// POST /api/auth/demo — login demo sem Google (útil quando sem Client ID)
+// POST /api/auth/demo — login demo sem Google (bloqueado quando GOOGLE_CLIENT_ID configurado → só Google)
 router.post('/demo', (req, res) => {
+  const hasGoogle = !!(process.env.GOOGLE_CLIENT_ID || process.env.VITE_GOOGLE_CLIENT_ID);
+  if (hasGoogle) return res.status(403).json({ erro: 'Login demo desativado — use Google para entrar' });
   const { nome, email } = req.body as { nome?: string; email?: string };
   if (!nome?.trim() || !email?.trim()) return res.status(400).json({ erro: 'nome e email obrigatórios' });
   const emailNorm = email.trim().toLowerCase();

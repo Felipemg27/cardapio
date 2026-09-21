@@ -231,6 +231,14 @@ function init(): void {
     return u.provider === 'google';
   }
 
+  // se GOOGLE_CLIENT_ID configurado → esconde demo, só Google libera
+  if (GOOGLE_CLIENT_ID) {
+    document.getElementById('login-demo-form')?.classList.add('hidden');
+    document.querySelector('.login-divider')?.classList.add('hidden');
+    const demoHint = document.querySelector('#login-modal p') as HTMLElement | null;
+    if (demoHint && demoHint.textContent?.includes('demonstração')) demoHint.classList.add('hidden');
+  }
+
   auth.subscribe(renderAuth);
   renderAuth();
   // quando auth muda, atualiza estado do botão de checkout
@@ -249,6 +257,7 @@ function init(): void {
 
   loginDemoForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (GOOGLE_CLIENT_ID) { showToast('Login demo desativado — use Google para entrar', 4000); return; }
     const nome = loginNome?.value.trim() ?? '';
     const email = loginEmail?.value.trim() ?? '';
     if (!nome || !email || !email.includes('@')) { showToast('Informe nome e e-mail válido'); return; }
