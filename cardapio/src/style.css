@@ -96,7 +96,7 @@ a { text-decoration: none; color: inherit; }
 .btn-primario {
   display: inline-block; background: linear-gradient(135deg, #ff6b35, #ff3c1a); color: #0a0a0a; padding: 14px 32px; border-radius: 30px;
   font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, box-shadow 0.3s;
-  position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1.5px solid rgba(255,255,255,0.9);
+  position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: none;
 }
 .btn-primario:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: linear-gradient(135deg, #ff7b45, #ff4c2a); color: #0a0a0a; }
 
