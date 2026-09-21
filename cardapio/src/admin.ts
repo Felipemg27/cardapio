@@ -135,15 +135,15 @@ function renderPratos() {
     return;
   }
   pratosLista.innerHTML = pratos.map(p => `
-    <div style="background:#fff; border:1.5px solid #f0e0d0; border-radius:12px; padding:14px; display:flex; gap:14px; align-items:center;">
-      <img src="${p.imagem}" alt="${p.alt}" style="width:72px; height:72px; border-radius:10px; object-fit:cover; flex-shrink:0;">
+    <div style="background:#1e1e1e; border:1.5px solid #2a2a2a; border-radius:12px; padding:14px; display:flex; gap:14px; align-items:center;">
+      <img src="${p.imagem}" alt="${p.alt}" style="width:72px; height:72px; border-radius:10px; object-fit:cover; flex-shrink:0; border:1px solid #2a2a2a;">
       <div style="flex:1; min-width:0;">
-        <div style="font-size:0.75rem; color:var(--cor-primary); font-weight:700; text-transform:uppercase;">${p.categoria} • ${p.id}</div>
-        <div style="font-weight:700;">${p.nome} — R$ ${p.preco.toFixed(2).replace('.',',')}</div>
-        <div style="font-size:0.85rem; color:#636e72; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.descricao}</div>
+        <div style="font-size:0.75rem; color:#ff6b35; font-weight:700; text-transform:uppercase;">${p.categoria} • ${p.id}</div>
+        <div style="font-weight:700; color:#f0f0f0;">${p.nome} — R$ ${p.preco.toFixed(2).replace('.',',')}</div>
+        <div style="font-size:0.85rem; color:#9a9a9a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.descricao}</div>
       </div>
       <div style="display:flex; gap:8px; flex-shrink:0;">
-        <button data-edit="${p.id}" style="padding:8px 14px; border-radius:999px; border:1.5px solid #f0d0c0; background:#fff; cursor:pointer; font-weight:600;">Editar</button>
+        <button data-edit="${p.id}" style="padding:8px 14px; border-radius:999px; border:1.5px solid #2a2a2a; background:#0f0f0f; color:#f0f0f0; cursor:pointer; font-weight:600;">Editar</button>
         <button data-del="${p.id}" style="padding:8px 14px; border-radius:999px; border:none; background:#c0392b; color:#fff; cursor:pointer; font-weight:600;">Excluir</button>
       </div>
     </div>
