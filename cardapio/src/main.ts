@@ -98,6 +98,16 @@ function init(): void {
   filtroCategoria?.addEventListener('change', filtrar);
   busca?.addEventListener('input', filtrar);
 
+  // ---- Menu opções superior esquerdo
+  const menuOpBtn = document.getElementById('menu-opcoes-btn') as HTMLButtonElement | null;
+  const menuOp = document.getElementById('menu-opcoes') as HTMLElement | null;
+  menuOpBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOp?.classList.toggle('hidden');
+  });
+  menuOp?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menuOp?.classList.add('hidden')));
+  document.addEventListener('click', () => menuOp?.classList.add('hidden'));
+
   // ---- Menu mobile + scroll spy
   const toggle = document.getElementById('menu-toggle');
   const navLinks = document.querySelector('.nav-links');
@@ -197,10 +207,12 @@ function init(): void {
   function renderAuth(): void {
     const user = auth.getUser();
     const adminLink = document.getElementById('admin-link') as HTMLElement | null;
+    const menuOpAdmin = document.getElementById('menu-op-admin') as HTMLElement | null;
     if (user) {
       btnLogin?.classList.add('hidden');
       userMenu?.classList.remove('hidden');
       if (adminLink) adminLink.classList.toggle('hidden', user.role !== 'admin');
+      if (menuOpAdmin) menuOpAdmin.classList.toggle('hidden', user.role !== 'admin');
       if (userNameEl) userNameEl.textContent = user.nome.split(' ')[0];
       if (dropdownName) dropdownName.textContent = user.nome;
       if (dropdownEmail) dropdownEmail.textContent = user.email;
@@ -220,6 +232,7 @@ function init(): void {
       btnLogin?.classList.remove('hidden');
       userMenu?.classList.add('hidden');
       adminLink?.classList.add('hidden');
+      document.getElementById('menu-op-admin')?.classList.add('hidden');
       userDropdown?.classList.remove('open');
     }
   }
