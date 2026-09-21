@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   base: './',
   root: resolve(__dirname, 'cardapio'),
+  envDir: resolve(__dirname, '.'),
   build: {
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,

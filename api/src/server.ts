@@ -8,6 +8,9 @@ import pedidosRouter from './routes/pedidos.js';
 import authRouter from './routes/auth.js';
 import { paths, readJson, writeJson } from './store.js';
 
+// carrega .env para GOOGLE_CLIENT_ID / ADMIN_EMAILS em dev (Node 20+)
+try { (process as any).loadEnvFile?.(); } catch {}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 3000);
 
