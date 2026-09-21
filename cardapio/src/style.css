@@ -72,11 +72,15 @@ a { text-decoration: none; color: inherit; }
 }
 .cart-btn.has-items .cart-badge { background: var(--cor-verde); }
 
-/* Hero - churrasqueira acesa ndmais */
+/* Hero - churrasqueira acesa ndmais HD */
 .hero-simples {
-  background: linear-gradient(rgba(0,0,0,0.68), rgba(10,10,10,0.82)), url('https://static.ndmais.com.br/2025/05/acender-churrasqueira-2-1300x867.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.62), rgba(10,10,10,0.78)), url('https://static.ndmais.com.br/2025/05/acender-churrasqueira-2-1300x867.jpg') center 45%/cover no-repeat;
   padding: 130px 0 70px; text-align: center; position: relative; overflow: hidden;
   border-bottom: 2px solid rgba(255,107,53,0.15);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  -webkit-font-smoothing: antialiased;
+  background-color: #0a0a0a;
 }
 .hero-simples::before {
   content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
