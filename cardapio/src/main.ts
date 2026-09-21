@@ -615,7 +615,9 @@ function init(): void {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => { init(); window.scrollTo(0, 0); if (location.hash) history.replaceState(null, '', location.pathname); });
 } else {
-  init();
+  init(); window.scrollTo(0, 0); if (location.hash) history.replaceState(null, '', location.pathname);
 }
+// garante sempre abrir em #inicio (topo) mesmo com hash ou reload
+window.addEventListener('load', () => window.scrollTo(0, 0));
