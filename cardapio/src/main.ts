@@ -513,9 +513,9 @@ function init(): void {
     const itens = cart.getItens();
     const total = cart.getTotal();
 
-    // abre nova guia sincronamente (preserva gesto) para garantir _blank mesmo após await
+    // abre nova guia sincronamente (preserva gesto do clique) para garantir _blank mesmo após await
     let win: Window | null = null;
-    try { win = window.open('about:blank', '_blank', 'noopener'); } catch { win = null; }
+    try { win = window.open('about:blank', '_blank'); } catch { win = null; }
 
     checkoutSubmitting = true;
     if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.textContent = 'Enviando...'; }
@@ -536,15 +536,22 @@ function init(): void {
     if (win && !win.closed) {
       win.location.href = whatsappLink;
       try { win.focus(); } catch {}
-      console.log('[checkout] nova guia via pre-open');
+      console.log('[checkout] nova guia via pre-open', win.location.href);
     } else {
-      const w = window.open(whatsappLink, '_blank', 'noopener');
-      if (w) {
-        console.log('[checkout] nova guia via window.open');
-      } else {
-        console.log('[checkout] popup bloqueado');
-        showToast('Pop-up bloqueado: permita pop-ups para abrir WhatsApp');
-        // não altera guia original; usuário pode clicar no link manualmente se necessário
+      // fallback: cria <a> e click (mais chance de passar no bloqueador que window.open async)
+      const a = document.createElement('a');
+      a.href = whatsappLink;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      console.log('[checkout] fallback via <a> click');
+      // ultimo recurso tenta window.open
+      const w = window.open(whatsappLink, '_blank');
+      if (!w) {
+        console.log('[checkout] popup bloqueado mesmo com <a>');
+        showToast('Pop-up bloqueado: permita pop-ups ou clique aqui para abrir WhatsApp');
       }
     }
     } finally {
